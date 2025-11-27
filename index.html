@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Reservas - RU IFPI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header id="header" class="hidden">
+        <div class="header-container">
+            <div class="logo">RU IFPI</div>
+            <div class="header-actions">
+                <div class="user-info">
+                    <div class="user-name" id="userName">Usuário</div>
+                    <div style="font-size: 0.85rem; opacity: 0.9;" id="userLevel">Ensino Superior</div>
+                </div>
+                <button class="btn-primary btn-small" onclick="logout()">Sair</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="alert" class="alert"></div>
+        <div id="loginScreen" class="screen active">
+            <div class="auth-container">
+                <h1 class="form-title">Entrar</h1>
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginMatricula">Matrícula SUAP</label>
+                        <input type="text" id="loginMatricula" placeholder="Ex: 2023001234" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginSenha">Senha</label>
+                        <input type="password" id="loginSenha" placeholder="Digite sua senha" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn-primary" style="width: 100%;">Entrar</button>
+                    </div>
+                </form>
+                <div class="auth-toggle">
+                    Não possui conta? <a onclick="showScreen('signupScreen')">Cadastre-se</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="signupScreen" class="screen">
+            <div class="auth-container">
+                <h1 class="form-title">Cadastro</h1>
+                <form onsubmit="handleSignup(event)">
+                    <div class="form-group">
+                        <label for="signupMatricula">Matrícula SUAP</label>
+                        <input type="text" id="signupMatricula" placeholder="Ex: 2023001234" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupNome">Nome Completo</label>
+                        <input type="text" id="signupNome" placeholder="Digite seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupNivel">Nível de Ensino</label>
+                        <select id="signupNivel" required>
+                            <option value="">Selecione o nível</option>
+                            <option value="medio">Ensino Médio</option>
+                            <option value="superior">Ensino Superior</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email (Institucional)</label>
+                        <input type="email" id="signupEmail" placeholder="seu.email@ifpi.edu.br" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupSenha">Senha</label>
+                        <input type="password" id="signupSenha" placeholder="Mínimo 6 caracteres" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn-primary" style="width: 100%;">Cadastrar</button>
+                    </div>
+                </form>
+                <div class="auth-toggle">
+                    Já possui conta? <a onclick="showScreen('loginScreen')">Entre aqui</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="dashboardScreen" class="screen">
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">Sistema de Reservas - RU</h1>
+                <p class="dashboard-subtitle">Restaurante Universitário IFPI</p>
+            </div>
+
+            <div id="statusCard" class="status-card">
+                <h3>Status da Conta</h3>
+                <div class="status-text" id="statusText">Ativo</div>
+            </div>
+
+            <div class="menu-tabs">
+                <button class="menu-tab active" onclick="switchTab('reserve')">Fazer Reserva</button>
+                <button class="menu-tab" onclick="switchTab('myReservations')">Minhas Reservas</button>
+            </div>
+
+            <div id="reserveTab" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Cardápio Disponível</h2>
+                    </div>
+                </div>
+                <div id="menuContainer" class="menu-grid"></div>
+            </div>
+
+            <div id="myReservationsTab" class="tab-content hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Minhas Reservas</h2>
+                    </div>
+                </div>
+                <div id="reservationsContainer" class="reservations-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 IFPI - Instituto Federal do Piauí. Sistema de Reservas do Restaurante Universitário. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
